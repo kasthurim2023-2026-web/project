@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Full page center */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Register box */
+.container {
+  background: #fff;
+  padding: 30px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+p {
+  text-align: center;
+  color: #666;
+}
+
+/* Inputs */
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Button */
+.registerbtn {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.registerbtn:hover {
+  background: #5a67d8;
+}
+
+/* Signin section */
+.signin {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.signin a {
+  color: #667eea;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<form action="action_page.php">
+  <div class="container">
+    <h1>Register</h1>
+    <p>Create your account</p>
+    <hr>
+
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+    <button type="submit" class="registerbtn">Register</button>
+
+    <div class="signin">
+      <p>Already have an account? <a href="login.html">Sign in</a></p>
+    </div>
+  </div>
+</form>
+
+</body>
+</html>
