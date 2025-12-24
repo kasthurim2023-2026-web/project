@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NLP Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+    .quiz-container {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 6px 0;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2>NLP Quiz</h2>
+  <div id="quiz"></div>
+  <button onclick="nextQuestion()">Next</button>
+  <div id="result"></div>
+</div>
+
+<script>
+  const quizData = [
+    {
+      question: "NLP stands for?",
+      options: ["Natural Language Processing", "Neural Language Program", "Natural Learning Process"],
+      answer: "Natural Language Processing"
+    },
+    {
+      question: "NLP is a part of?",
+      options: ["AI", "DBMS", "OS"],
+      answer: "AI"
+    },
+    {
+      question: "Text-ai words-aa split panna process?",
+      options: ["Tokenization", "Stemming", "Parsing"],
+      answer: "Tokenization"
+    },
+    {
+      question: "Root word-ai find panna use pannrathu?",
+      options: ["Stemming", "Tagging", "Chunking"],
+      answer: "Stemming"
+    },
+    {
+      question: "Grammar role identify panna technique?",
+      options: ["POS Tagging", "NER", "Parsing"],
+      answer: "POS Tagging"
+    },
+    {
+      question: "Stop word example?",
+      options: ["the", "computer", "language"],
+      answer: "the"
+    },
+    {
+      question: "Emotion detect panna NLP task?",
+      options: ["Sentiment Analysis", "Tokenization", "NER"],
+      answer: "Sentiment Analysis"
+    },
+    {
+      question: "Speech-ai text-aa convert pannrathu?",
+      options: ["Speech Recognition", "Text Mining", "TTS"],
+      answer: "Speech Recognition"
+    },
+    {
+      question: "Text-ai speech-aa convert pannrathu?",
+      options: ["Text-to-Speech", "Speech-to-Text", "NER"],
+      answer: "Text-to-Speech"
+    },
+    {
+      question: "Name identify panna NLP task?",
+      options: ["NER", "POS", "Parsing"],
+      answer: "NER"
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+
+  function loadQuiz() {
+    const quiz = document.getElementById("quiz");
+    quiz.innerHTML = "";
+
+    const q = quizData[current];
+    quiz.innerHTML = `<div class="question">${current + 1}. ${q.question}</div>`;
+
+    q.options.forEach(opt => {
+      quiz.innerHTML += `
+        <label>
+          <input type="radio" name="answer" value="${opt}"> ${opt}
+        </label>
+      `;
+    });
+  }
+
+  function nextQuestion() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+
+    if (!selected) {
+      alert("Answer select pannunga!");
+      return;
+    }
+
+    if (selected.value === quizData[current].answer) {
+      score++;
+    }
+
+    current++;
+
+    if (current < quizData.length) {
+      loadQuiz();
+    } else {
+      document.getElementById("quiz").innerHTML = "";
+      document.getElementById("result").innerHTML =
+        `You scored ${score} out of ${quizData.length} ??`;
+    }
+  }
+
+  loadQuiz();
+</script>
+
+</body>
+</html>
