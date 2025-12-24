@@ -1,0 +1,150 @@
+%%html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NLP Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+    .quiz-container {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 6px 0;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2>NLP Quiz</h2>
+  <div id="quiz"></div>
+  <button onclick="nextQuestion()">Next</button>
+  <div id="result"></div>
+</div>
+
+<script>
+  const quizData = [
+  {
+    question: "Which of the following is NOT a type of digital image?",
+    options: ["A) Binary image", "B) Grayscale image", "C) Color image", "D) Analog image"],
+    answer: "D) Analog image"
+  },
+  {
+    question: "The process of converting a continuous image into a discrete image is called:",
+    options: ["A) Quantization", "B) Sampling", "C) Filtering", "D) Edge detection"],
+    answer: "B) Sampling"
+  },
+  {
+    question: "In an 8-bit grayscale image, the number of possible intensity levels is:",
+    options: ["A) 64", "B) 128", "C) 256", "D) 512"],
+    answer: "C) 256"
+  },
+  {
+    question: "Which of the following operations is used for noise reduction in images?",
+    options: ["A) Histogram equalization", "B) Smoothing filter", "C) Edge detection", "D) Thresholding"],
+    answer: "B) Smoothing filter"
+  },
+  {
+    question: "The Laplacian operator is used in image processing for:",
+    options: ["A) Image sharpening", "B) Image smoothing", "C) Color conversion", "D) Image compression"],
+    answer: "A) Image sharpening"
+  },
+  {
+    question: "Histogram equalization is primarily used to:",
+    options: ["A) Reduce noise", "B) Enhance contrast", "C) Convert color to grayscale", "D) Detect edges"],
+    answer: "B) Enhance contrast"
+  },
+  {
+    question: "Morphological operations in digital image processing are mainly applied to:",
+    options: ["A) Color images", "B) Binary images", "C) Grayscale images", "D) Video frames"],
+    answer: "B) Binary images"
+  },
+  {
+    question: "Which transform is commonly used for image compression?",
+    options: ["A) Fourier Transform", "B) Laplace Transform", "C) Discrete Cosine Transform (DCT)", "D) Z-Transform"],
+    answer: "C) Discrete Cosine Transform (DCT)"
+  },
+  {
+    question: "Edge detection in an image helps to:",
+    options: ["A) Reduce image size", "B) Identify object boundaries", "C) Increase brightness", "D) Convert color image to grayscale"],
+    answer: "B) Identify object boundaries"
+  },
+  {
+    question: "Median filtering is preferred over mean filtering for:",
+    options: ["A) Reducing Gaussian noise", "B) Reducing salt-and-pepper noise", "C) Image sharpening", "D) Color enhancement"],
+    answer: "B) Reducing salt-and-pepper noise"
+  }
+];
+
+
+  let current = 0;
+  let score = 0;
+
+  function loadQuiz() {
+    const quiz = document.getElementById("quiz");
+    quiz.innerHTML = "";
+
+    const q = quizData[current];
+    quiz.innerHTML = `<div class="question">${current + 1}. ${q.question}</div>`;
+
+    q.options.forEach(opt => {
+      quiz.innerHTML += `
+        <label>
+          <input type="radio" name="answer" value="${opt}"> ${opt}
+        </label>
+      `;
+    });
+  }
+
+  function nextQuestion() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+
+    if (!selected) {
+      alert("Answer select pannunga!");
+      return;
+    }
+
+    if (selected.value === quizData[current].answer) {
+      score++;
+    }
+
+    current++;
+
+    if (current < quizData.length) {
+      loadQuiz();
+    } else {
+      document.getElementById("quiz").innerHTML = "";
+      document.getElementById("result").innerHTML =
+        `You scored ${score} out of ${quizData.length} ??`;
+    }
+  }
+
+  loadQuiz();
+</script>
+
+</body>
+</html>
