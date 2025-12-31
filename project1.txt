@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz</title>
+  <style>
+    body{ font-family: Arial, sans-serif; margin:0; padding:28px; background:#f8fafc; color:#0f172a; }
+    .wrap{ max-width:900px; margin:0 auto; background:#fff; padding:22px; border-radius:10px; box-shadow:0 8px 26px rgba(2,6,23,0.08); }
+    h1{ margin:0 0 6px; font-size:22px; }
+    p.muted{ color:#6b7280; margin:0 0 18px; }
+    .back{ margin-bottom:12px; display:inline-block; color:#475569; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="dashboard.html">← Back to Dashboard</a>
+    <h1 id="title">Quiz</h1>
+    <p class="muted" id="subtitle">Loading subject...</p>
+
+    <div id="content">
+      <!-- Example placeholder -->
+      <p>This is a placeholder quiz page. Implement quiz questions here for the selected subject.</p>
+    </div>
+  </div>
+
+  <script>
+    function getQueryParam(key){
+      const params = new URLSearchParams(window.location.search);
+      return params.get(key);
+    }
+
+    const subjectName = getQueryParam('subject') || 'Unknown Subject';
+    const subjectId = getQueryParam('id') || '';
+
+    document.getElementById('title').textContent = subjectName + ' Quiz';
+    document.getElementById('subtitle').textContent = subjectId ? 'Subject ID: ' + subjectId : '';
+
+    // TODO: Load questions (e.g., fetch('/api/questions?subject=' + encodeURIComponent(subjectId)))
+    // For demo, we'll show a sample message
+    const content = document.getElementById('content');
+    content.innerHTML += '<p><strong>Note:</strong> Replace this with quiz questions fetched from your server or defined in JS.</p>';
+  </script>
+</body>
+</html>
