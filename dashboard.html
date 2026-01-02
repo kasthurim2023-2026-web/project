@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Welcome to Quiz Dashboard</h2>
+  <p id="user"></p>
+  <button onclick="startQuiz()">Start Quiz</button>
+  <br><br>
+  </div>
+
+<script>
+  let user = localStorage.getItem("loggedUser");
+  if (!user) {
+    window.location.href = "login.html";
+  }
+  document.getElementById("user").innerText = "Hello, " + user;
+
+  function startQuiz() {
+    alert("Quiz page inga varum (next step)");
+  }
+
+  function logout() {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>
