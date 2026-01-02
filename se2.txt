@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SE Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+    .quiz-container {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 6px 0;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2>SE Quiz</h2>
+  <div id="quiz"></div>
+  <button onclick="nextQuestion()">Next</button>
+  <div id="result"></div>
+</div>
+
+<script>
+  const quizData = [
+    {
+      question: "Software Engineering-na enna?",
+      options: [
+        "Hardware design",
+        "Software develop & maintain process",
+        "Network setup",
+        "Database storage"
+      ],
+      answer: "Software develop & maintain process"
+    },
+    {
+      question: "SDLC full form enna?",
+      options: [
+        "System Design Life Cycle",
+        "Software Development Life Cycle",
+        "Software Design Level Code",
+        "System Development Logic Control"
+      ],
+      answer: "Software Development Life Cycle"
+    },
+    {
+      question: "SDLC-la first phase ethu?",
+      options: [
+        "Design",
+        "Coding",
+        "Requirement Analysis",
+        "Testing"
+      ],
+      answer: "Requirement Analysis"
+    },
+    {
+      question: "Linear sequential model ethu?",
+      options: [
+        "Agile",
+        "Spiral",
+        "Prototype",
+        "Waterfall"
+      ],
+      answer: "Waterfall"
+    },
+    {
+      question: "Flexible & iterative model ethu?",
+      options: [
+        "Waterfall",
+        "V-Model",
+        "Agile",
+        "RAD"
+      ],
+      answer: "Agile"
+    },
+    {
+      question: "Software requirements document ku short form?",
+      options: [
+        "SRD",
+        "SDD",
+        "SRS",
+        "STD"
+      ],
+      answer: "SRS"
+    },
+    {
+      question: "Internal code theriyama testing pannradhu?",
+      options: [
+        "White box testing",
+        "Unit testing",
+        "Black box testing",
+        "Integration testing"
+      ],
+      answer: "Black box testing"
+    },
+    {
+      question: "Are we building the product right?” nu check pannradhu?",
+      options: [
+        "Validation",
+        "Verification",
+        "Testing",
+        "Debugging"
+      ],
+      answer: "Verification"
+    },
+    {
+      question: "Bug remove pannra process enna?",
+      options: [
+        "Testing",
+        "Coding",
+        "Debugging",
+        "Designing"
+      ],
+      answer: "Debugging"
+    },
+    {
+      question: "Software release apram nadakkura phase:",
+      options: [
+        "Design",
+        "Testing",
+        "Deployment",
+        "Maintenance"
+      ],
+      answer: "Maintenance"
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+
+  function loadQuiz() {
+    const quiz = document.getElementById("quiz");
+    quiz.innerHTML = "";
+
+    const q = quizData[current];
+    quiz.innerHTML = `<div class="question">${current + 1}. ${q.question}</div>`;
+
+    q.options.forEach(opt => {
+      quiz.innerHTML += `
+        <label>
+          <input type="radio" name="answer" value="${opt}"> ${opt}
+        </label>
+      `;
+    });
+  }
+
+  function nextQuestion() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+
+    if (!selected) {
+      alert("Answer select pannunga!");
+      return;
+    }
+
+    if (selected.value === quizData[current].answer) {
+      score++;
+    }
+
+    current++;
+
+    if (current < quizData.length) {
+      loadQuiz();
+    } else {
+      document.getElementById("quiz").innerHTML = "";
+      document.getElementById("result").innerHTML =
+        `You scored ${score} out of ${quizData.length} ?`;
+      document.querySelector("button").style.display = "none"; // hide next button
+    }
+  }
+
+  loadQuiz();
+</script>
+
+</body>
+</html>
