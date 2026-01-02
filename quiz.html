@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Quiz</h2>
+  <p id="timer">Time: 30</p>
+  <h3 id="question"></h3>
+
+  <div>
+    <input type="radio" name="option" id="opt1">
+    <label for="opt1" id="label1"></label><br>
+
+    <input type="radio" name="option" id="opt2">
+    <label for="opt2" id="label2"></label><br>
+
+    <input type="radio" name="option" id="opt3">
+    <label for="opt3" id="label3"></label><br>
+
+    <input type="radio" name="option" id="opt4">
+    <label for="opt4" id="label4"></label>
+  </div>
+
+  <br>
+  <button onclick="nextQuestion()">Next</button>
+</div>
+
+<script>
+  const quiz = [
+    {
+      q: "HTML stands for?",
+      options: [
+        "Hyper Text Markup Language",
+        "High Text Machine Language",
+        "Hyperlinks Text Mark",
+        "None"
+      ],
+      ans: 0
+    },
+    {
+      q: "Which is used for styling?",
+      options: ["HTML", "CSS", "Java", "PHP"],
+      ans: 1
+    },
+    {
+      q: "JavaScript is used for?",
+      options: ["Design", "Structure", "Interactivity", "Database"],
+      ans: 2
+    }
+  ];
+
+  let index = 0;
+  let score = 0;
+  let time = 30;
+  let timer;
+
+  function loadQuestion() {
+    document.getElementById("question").innerText = quiz[index].q;
+    document.getElementById("label1").innerText = quiz[index].options[0];
+    document.getElementById("label2").innerText = quiz[index].options[1];
+    document.getElementById("label3").innerText = quiz[index].options[2];
+    document.getElementById("label4").innerText = quiz[index].options[3];
+
+    document.querySelectorAll("input[name='option']").forEach(o => o.checked = false);
+  }
+
+  function startTimer() {
+    timer = setInterval(() => {
+      time--;
+      document.getElementById("timer").innerText = "Time: " + time;
+
+      if (time === 0) {
+        endQuiz();
+      }
+    }, 1000);
+  }
+
+  function nextQuestion() {
+    let options = document.querySelectorAll("input[name='option']");
+    options.forEach((opt, i) => {
+      if (opt.checked && i === quiz[index].ans) {
+        score++;
+      }
+    });
+
+    index++;
+
+    if (index < quiz.length) {
+      loadQuestion();
+    } else {
+      endQuiz();
+    }
+  }
+
+  function endQuiz() {
+    clearInterval(timer);
+    localStorage.setItem("score", score);
+    document.body.innerHTML = `
+      <div class="container">
+        <h2>Quiz Completed</h2>
+        <p>Your Score: ${score} / ${quiz.length}</p>
+        <button onclick="goDashboard()">Go Dashboard</button>
+      </div>
+    `;
+  }
+
+  function goDashboard() {
+    window.location.href = "dashboard.html";
+  }
+
+  loadQuestion();
+  startTimer();
+</script>
+
+</body>
+</html>
